@@ -4,8 +4,4 @@ logs/*
 *.iml
 *.ipr
 *.iws
-<<<<<<< HEAD
 .idea/
-=======
-.idea/
->>>>>>> a75a0ded56c1cfb7f56d1c2734068ced7dce6d81
