@@ -28,3 +28,18 @@
   content: "";
   padding: 0;
 }
+
+div.loginForm hr{
+    margin-bottom: 12px;
+    margin-top: 4px;
+}
+
+img.ctbLogo{
+    display: block;
+    margin: 14px auto 0;
+}
+
+.loginForm{
+   margin: 0 auto;
+   width:300px;
+}
