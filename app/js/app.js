@@ -12,16 +12,7 @@ myApp.config(['$routeProvider', function($routeProvider) {
   }]) ;
 
 myApp.config(
-        ['RestangularProvider', '$httpProvider',
-            function(RestangularProvider, $httpProvider) {
-                RestangularProvider.setBaseUrl('https://api.foursquare.com/v2');
-                RestangularProvider.setListTypeIsArray(false);
-
-                RestangularProvider.setResponseExtractor(function(response, operation, what) {
-                    if (operation === 'get') {
-                        return response.response[what.substring(0, what.length - 1)];
-                    } else if (operation === 'getList') {
-                        return response.response[what].groups[0].items;
-                    }
-                });
+        ['RestangularProvider',
+            function(RestangularProvider) {
+                RestangularProvider.setBaseUrl('http://10.0.2.87:2403');
 } ]);

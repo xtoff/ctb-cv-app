@@ -1,4 +1,5 @@
 <div class="container" ng-controller="BasicInfoCtrl">
+<form>
 <fieldset>
 <legend>Basic info</legend>
 <div class="row">
@@ -8,6 +9,7 @@
             <input id="first-name" name="first-name" ng-model="user.firstName" type="text" placeholder="First name"
                    class="input-xlarge">
             <p class="help-block"></p>
+            <span ng-model="user.firstName">{{user.firstName}}</span>
         </div>
     </div>
 
@@ -333,4 +335,5 @@
 
 
 </fieldset>
+</form>
 </div>
