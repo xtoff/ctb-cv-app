@@ -20,5 +20,6 @@ var app = angular.module('myApp.controllers', ['$strap.directives']).
        $scope.handleSave = function(){
            user = $scope.user;
            user.put();
+           showSuccessAlert("User succesfully updated");
        }
     });
