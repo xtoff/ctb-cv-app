@@ -1,5 +1,5 @@
 <div class="container" xmlns="http://www.w3.org/1999/html">
-<form class="form-horizontal" ng-controller="BasicInfoCtrl" ng-submit="handleSave()">
+<form class="form-horizontal" name="basicInfoForm" ng-controller="BasicInfoCtrl" ng-submit="handleSave()">
 <fieldset>
 <legend>Basic info</legend>
 <div class="alert" style="display:none;">
@@ -10,17 +10,16 @@
     <div class="control-group span6">
         <label class="control-label">First Name</label>
         <div class="controls">
-            <input id="first-name" type="text" ng-model="user.firstName" placeholder="First name" class="input-xlarge">
-            <p class="help-block"></p>
+            <input id="first-name" type="text" name="firstName" ng-model="user.firstName" placeholder="First name" class="input-xlarge" required>
+            <span class="error" ng-show="basicInfoForm.firstName.$error.required">Required!</span>
         </div>
     </div>
 
     <div class="control-group span6">
         <label class="control-label">Last Name</label>
         <div class="controls">
-            <input id="last-name" ng-model="user.lastName" type="text" placeholder="Last name"
-                   class="input-xlarge">
-            <p class="help-block"></p>
+            <input id="last-name"type="text" name="lastName" ng-model="user.lastName"  placeholder="Last name" class="input-xlarge" required>
+            <span class="error" ng-show="basicInfoForm.lastName.$error.required">Required!</span>
         </div>
     </div>
 </div>
@@ -50,9 +49,10 @@
         <label class="control-label">Birth day</label>
         <div class="controls">
             <div class="control-group input-append">
-                <input type="text" ng-model="user.birthDay" data-date-format="dd/mm/yyyy" bs-datepicker>
+                <input type="text" name="birthDay" id="birthdayDatePicker" ng-model="user.birthDay" data-date-format="dd/mm/yyyy" bs-datepicker required>
                 <button type="button" class="btn" data-toggle="datepicker"><i class="icon-calendar"></i></button>
             </div>
+            <span class="error" ng-show="basicInfoForm.birthDay.$error.required">Required!</span>
         </div>
     </div>
 
@@ -60,9 +60,10 @@
         <label class="control-label">Hire date</label>
         <div class="controls">
             <div class="control-group input-append">
-                <input type="text" ng-model="user.hireDate" data-date-format="dd/mm/yyyy" bs-datepicker>
+                <input type="text" name="hireDate" ng-model="user.hireDate" data-date-format="dd/mm/yyyy" bs-datepicker required>
                 <button type="button" class="btn" data-toggle="datepicker"><i class="icon-calendar"></i></button>
             </div>
+            <span class="error" ng-show="basicInfoForm.hireDate.$error.required">Required!</span>
         </div>
     </div>
 </div>
@@ -71,7 +72,7 @@
 <div class="control-group span6">
     <label class="control-label">Nationality</label>
     <div class="controls">
-        <select id="nationality" name="nationality" ng-model="user.nationality" class="input-xlarge">
+        <select id="nationality" name="nationality" ng-model="user.nationality" class="input-xlarge" required>
             <option value="" selected="selected">(please select a country)</option>
             <option value="AF">Afghanistan</option>
             <option value="AL">Albania</option>
@@ -313,13 +314,14 @@
             <option value="ZM">Zambia</option>
             <option value="ZW">Zimbabwe</option>
         </select>
+        <span class="error" ng-show="basicInfoForm.nationality.$error.required">Required!</span>
     </div>
 </div>
     <div class="control-group span6">
         <label class="control-label">Diploma</label>
         <div class="controls">
-            <input id="diploma" name="diploma" ng-model="user.diploma" type="text" placeholder="Diploma" class="input-xlarge">
-            <p class="help-block"></p>
+            <input id="diploma" name="diploma" ng-model="user.diploma" type="text" placeholder="Diploma" class="input-xlarge" required>
+            <span class="error" ng-show="basicInfoForm.diploma.$error.required">Required!</span>
         </div>
     </div>
 </div>
@@ -330,7 +332,6 @@
         <div class="controls">
             <textarea id="personaldescr" name="personaldescr" ng-model="user.personalDescription" placeholder="Write something about yourself" rows="6" class="input-xxlarge">
             </textarea>
-            <p class="help-block"></p>
         </div>
     </div>
 </div>

@@ -17,10 +17,10 @@ myApp.config(
                 RestangularProvider.setBaseUrl('http://10.0.2.87:2403');
 } ]);
 
-function showSuccessAlert(pMessage) {
+var showSuccessAlert = function(pMessage) {
     var alertBox = $('div.alert');
     /*alertBox.removeClass('alert alert-success');*/
     alertBox.addClass('alert-success');
-    alertBox.find('span').text(pMessage);
-    alertBox.show();
-}
+    alertBox.find('span').text(pMessage + ' succesfully updated!');
+    alertBox.show('slow');
+};
