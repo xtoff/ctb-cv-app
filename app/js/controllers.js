@@ -52,7 +52,7 @@ var app = angular.module('myApp.controllers', ['$strap.directives']).
 
     });
 
-app.controller('MyCtrl2', function($rootScope, $scope, Restangular){
+app.controller('LoginController', function($rootScope, $scope, Restangular){
 
     $scope.handleLogin = function(){
 
@@ -69,4 +69,10 @@ app.controller('MyCtrl2', function($rootScope, $scope, Restangular){
         }
     }
 
+}) ;
+
+app.controller('LogoutController', function($rootScope, $scope){
+    $scope.handleLogout = function(){
+        $rootScope.isAuthenticated = false;
+    }
 }) ;

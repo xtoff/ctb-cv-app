@@ -10,15 +10,14 @@
   <link rel="stylesheet" href="css/bootstrap-datepicker.css"/>
 </head>
 <body>
-    <div class="navbar">
+    <div class="navbar" ng-controller="LogoutController">
         <div class="navbar-inner">
             <a class="brand" href="#">Contribute CV Application</a>
             <ul class="nav" ">
                 <li class="active"><a href="#/view1">Home</a></li>
                 <li ng-show="isAuthenticated"><a href="#/basic-info">My CV</a></li>
                 <li ng-hide="isAuthenticated"><a  href="#/login">Login</a></li>
-                -->{{isAuthenticated}}
-                <li ng-show="isAuthenticated"><a  href="#/logout">Lgout</a></li>
+                <li ng-show="isAuthenticated"><a ng-click="handleLogout()" href="#/login">Lgout</a></li>
             </ul>
         </div>
     </div>
