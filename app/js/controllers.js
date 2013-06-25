@@ -2,6 +2,27 @@
 
 /* Controllers */
 
+var SkillLevelEnum = {
+                        NA :   {"skillLevel": 0, "skillLevelLabel": "N/A"},
+                        BASIC : {"skillLevel": 1, "skillLevelLabel": "Basic"},
+                        GOOD : {"skillLevel": 2, "skillLevelLabel": "Good"},
+                        FLUENT : {"skillLevel": 3, "skillLevelLabel": "Fluent"},
+                        MT : {"skillLevel": 4, "skillLevelLabel": "Mothertongue"}
+};
+
+var LanguageEnum = {
+    NL : {"label" : "Dutch"},
+    FR : {"label" : "French"},
+    EN : {"label" : "English"},
+    DE : {"label" : "German"}
+};
+
+if(Object.freeze){
+    // enum since 1.8.5
+    Object.freeze(SkillLevelEnum);
+    Object.freeze(LanguageEnum);
+}
+
 var app = angular.module('myApp.controllers', ['$strap.directives']).
   controller('MyCtrl1', [function() {
 
@@ -18,7 +39,8 @@ var app = angular.module('myApp.controllers', ['$strap.directives']).
 
       $('#birthdayDatePicker').datepicker('setEndDate', adultAge);
 
-
+       $scope.languages = LanguageEnum;
+       $scope.skillLevels = SkillLevelEnum;
 
        var user = Restangular.one("user", 'f2a2a0f66cb0488c');
 
@@ -30,4 +52,8 @@ var app = angular.module('myApp.controllers', ['$strap.directives']).
            user = $scope.user;
            user.put().then(showSuccessAlert('User') );
        }
+
+
+
+
     });
