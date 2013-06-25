@@ -5,9 +5,6 @@
 var app = angular.module('myApp.controllers', ['$strap.directives']).
   controller('MyCtrl1', [function() {
 
-  }])
-  .controller('MyCtrl2', [function() {
-
   }]);
 
    app.controller('BasicInfoCtrl', function($scope, $window, $location, Restangular){
@@ -31,3 +28,22 @@ var app = angular.module('myApp.controllers', ['$strap.directives']).
            user.put().then(showSuccessAlert('User') );
        }
     });
+
+app.controller('MyCtrl2', function($rootScope, $scope, Restangular){
+
+    $scope.handleLogin = function(){
+
+        var username = $scope.username;
+        var password = $scope.password;
+
+        if((username === 'frederik' && password === 'frederik')
+            || (username === 'bert' && password === 'bert')
+            || (username === 'kristof' && password === 'kristof')){
+
+            $rootScope.isAuthenticated = true;
+        }else{
+            $rootScope.isAuthenticated = false;
+        }
+    }
+
+}) ;

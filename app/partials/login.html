@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" ng-controller="MyCtrl2">
     <div class="loginForm">
         <img alt="Contribute logo" class="ctbLogo" src="img/ctb-logo.png">
             <hr>
@@ -10,7 +10,7 @@
                         <label for="username" >Username</label>
                     </div>
                     <div class="span3">
-                        <input id="username" name="username" type="text"/>
+                        <input id="username" ng-model="username" name="username" type="text"/>
                     </div>
                 </div>
                 <div class="row">
@@ -18,7 +18,7 @@
                         <label for="password">Password</label>
                     </div>
                     <div class="span3">
-                        <input id="password" name="password" type="password" />
+                        <input id="password" ng-model="password" name="password" type="password" />
                     </div>
                 </div>
                 <div class="row">
@@ -34,7 +34,7 @@
 
                 <div class="row">
                     <div class="span4">
-                        <input id="loginBtn" class="btn btn-primary btn-block" value="Login" />
+                        <input id="loginBtn" ng-click="handleLogin()" class="btn btn-primary btn-block" value="Login" />
                     </div>
                 </div>
             </form>
