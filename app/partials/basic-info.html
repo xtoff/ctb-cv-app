@@ -335,6 +335,33 @@
         </div>
     </div>
 </div>
+<ul>
+    <li ng-repeat="lang in user.languages">{{lang.language}} {{lang.skillLevel}}</li>
+</ul>
+
+<div class="row">
+    <div class="span12">
+        <fieldset>
+            <legend>Language knowledge</legend>
+            <table class="table">
+                <thead>
+                    <th>Language</th>
+                    <th>Skill Level</th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="lang in user.languages">
+                        <td>{{lang.language}} <span>{{lang.skillLevel}}</span></td>
+                        <td>
+                            <div class="btn-group" ng-model="lang.skillLevel" bs-buttons-radio>
+                                <button ng-repeat="(key, value) in skillLevels" type="button" class="btn" value="{{key}}" >{{value.skillLevelLabel}}</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
+    </div>
+</div>
 
 <div class="row">
     <input type="submit"/>
