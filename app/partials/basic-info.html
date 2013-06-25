@@ -350,10 +350,10 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="lang in user.languages">
-                        <td>{{lang.language}}</td>
+                        <td>{{lang.language}} <span>{{lang.skillLevel}}</span></td>
                         <td>
-                            <div class="btn-group" bs-buttons-radio="" data-toggle="buttons-radio">
-                                <button ng-repeat="(key, value) in skillLevels" type="button" class="btn" ng-model="lang.skillLevel">{{value.skillLevelLabel}} - {{key}}</button>
+                            <div class="btn-group" ng-model="lang.skillLevel" bs-buttons-radio>
+                                <button ng-repeat="(key, value) in skillLevels" type="button" class="btn" value="{{key}}" >{{value.skillLevelLabel}}</button>
                             </div>
                         </td>
                     </tr>
