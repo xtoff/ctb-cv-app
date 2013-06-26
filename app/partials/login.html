@@ -1,9 +1,8 @@
-<div class="container-fluid" ng-controller="LoginController">
-    <div class="loginForm">
-        <img alt="Contribute logo" class="ctbLogo" src="img/ctb-logo.png">
-            <hr>
-            <br>
-
+<br />
+<div class="alerts">
+    <div class="alert fade" ng-repeat="alert in alerts" bs-alert="alert"></div>
+</div>
+<div class="loginForm">
             <form id="login-form">
                 <div class="row">
                     <div class="span1">
@@ -34,10 +33,9 @@
 
                 <div class="row">
                     <div class="span4">
-                        <input id="loginBtn" ng-click="handleLogin()" class="btn btn-primary btn-block" value="Login" />
+                        <input id="loginBtn" ng-click="handleLogin()" class="btn btn-danger btn-block success" value="Login" />
                     </div>
                 </div>
             </form>
     </div>
-</div>
 

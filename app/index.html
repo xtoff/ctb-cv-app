@@ -9,20 +9,54 @@
   <link rel="stylesheet" href="css/font-awesome.min.css"/>
   <link rel="stylesheet" href="css/bootstrap-datepicker.css"/>
 </head>
-<body>
-    <div class="navbar" ng-controller="LogoutController">
-        <div class="navbar-inner">
-            <a class="brand" href="#">Contribute CV Application</a>
-            <ul class="nav" ">
-                <li class="active"><a href="#/view1">Home</a></li>
-                <li ng-show="isAuthenticated"><a href="#/basic-info">My CV</a></li>
-                <li ng-hide="isAuthenticated"><a  href="#/login">Login</a></li>
-                <li ng-show="isAuthenticated"><a ng-click="handleLogout()" href="#/login">Lgout</a></li>
-            </ul>
-        </div>
-    </div>
+<body ng-controller="LoginController">
+        <div class="topBar"></div>
 
-  <div ng-view></div>
+        <div class="header" style="margin-bottom: 10px;">
+            <div class="container">
+                <div class="row headerRow" style="height: 75px; position:relative; ">
+                    <div class="span12" style="height:50px;">
+                        <img style="vertical-align:bottom; padding-top: 10px;" alt="Contribute logo" class="ctbLogo" src="img/ctb-logo.png" />
+                        &nbsp;&nbsp;
+                        <span style="font-weight:bold;font-size: 40px; color:#333333; font-family: "Trebuchet MS"">CV application</span>
+                    </div>
+
+                </div>
+
+                <div style="float: right; ">
+                    <span ng-show="isAuthenticated">
+                        Welkom {{ loggedUser }}&nbsp;&nbsp;
+                    </span>
+                    <div ng-show="isAuthenticated" class="label label-inverse" style="background-color:#eb1d32;">
+                        <a class="noStyleLink" href="#/login" ng-click="handleLogout()">Logout</a>
+                    </div>
+                    <div ng-hide="isAuthenticated" class="label label-inverse" style="background-color:#eb1d32;">
+                        <a class="noStyleLink" href="#/login">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="mainContent">
+            <div class="container hero-unit">
+                <div ng-controller="TabsDemoCtrl">
+                    <tabset>
+                        <tab heading="Static title">Static content</tab>
+                        <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled">
+                            {{tab.content}}
+                        </tab>
+                        <tab select="alertMe()">
+                            <tab-heading>
+                                <i class="icon-bell"></i> Select me for alert!
+                            </tab-heading>
+                            I've got an HTML heading, and a select callback. Pretty cool!
+                        </tab>
+                    </tabset>
+                </div>
+                <div ng-view></div>
+            </div>
+        </div>
 
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
@@ -35,8 +69,10 @@
   <script src="lib/angular-strap.min.js"></script>
   <script src="lib/restangular.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/angular-strap/directives/tab.js"></script>
   <script src="js/services.js"></script>
   <script src="js/controllers.js"></script>
+  <script src="js/alert.js"></script>
   <script src="js/filters.js"></script>
   <script src="js/directives.js"></script>
   <script src="js/routingConfig.js"></script>
