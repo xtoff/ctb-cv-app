@@ -2,44 +2,33 @@
 
 /* http://docs.angularjs.org/guide/dev_guide.e2e-testing */
 
-describe('my app', function() {
-
-  beforeEach(function() {
-    browser().navigateTo('../../app/index.html');
-  });
-
-
-  it('should automatically redirect to /view1 when location hash/fragment is empty', function() {
-    expect(browser().location().url()).toBe("/view1");
-  });
-
-
-  describe('view1', function() {
+describe('cv tool', function() {
 
     beforeEach(function() {
-      browser().navigateTo('#/view1');
+        browser().navigateTo('../../app/index.html');
     });
 
 
-    it('should render view1 when user navigates to /view1', function() {
-      expect(element('[ng-view] p:first').text()).
-        toMatch(/partial for view 1/);
+    it('should automatically redirect to /login when location hash/fragment is empty', function() {
+        expect(browser().location().url()).toBe("/login");
     });
-
-  });
-
-
-  describe('view2', function() {
-
-    beforeEach(function() {
-      browser().navigateTo('#/view2');
-    });
-
-
-    it('should render view2 when user navigates to /view2', function() {
-      expect(element('[ng-view] p:first').text()).
-        toMatch(/partial for view 2/);
-    });
-
-  });
 });
+
+describe('cv tool login', function(){
+
+        beforeEach(function() {
+            browser().navigateTo('../../app/index.html');
+        });
+
+        it('should show my resume after succesfull login', function(){
+            expect(browser().location().url()).toBe("/login");
+            input('username').enter('bert');
+            input('password').enter('bert');
+            element('#loginBtn').click();
+            pause();
+            expect(browser().location().url()).toBe("/basic-info");
+        });
+
+    }
+);
+
