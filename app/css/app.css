@@ -1,5 +1,13 @@
 /* app css stylesheet */
 
+html{
+    overflow-y: scroll;
+}
+
+.headerRow div{
+    height:75px;
+}
+
 .menu {
   list-style: none;
   border-bottom: 0.1em solid black;
@@ -29,17 +37,34 @@
   padding: 0;
 }
 
-div.loginForm hr{
-    margin-bottom: 12px;
-    margin-top: 4px;
+div.mainContent hr{
+ margin: 0px 0px 20px 0px;
 }
 
 img.ctbLogo{
-    display: block;
-    margin: 14px auto 0;
+
 }
 
 .loginForm{
    margin: 0 auto;
    width:300px;
+}
+
+a.noStyleLink{
+    color: #ffffff;
+    text-decoration: none;
+}
+
+a.noStyleLink:hover{
+    color: #ffffff;
+    text-underline: none;
+}
+
+div.topBar{
+    background-color: #eb1d32;
+    height:10px;
+    margin-left: 10px;
+    margin-top:10px;
+    margin-right:10px;
+    margin-bottom: 0px;
 }

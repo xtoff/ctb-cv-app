@@ -23,42 +23,60 @@ if(Object.freeze){
     Object.freeze(LanguageEnum);
 }
 
+var TabsDemoCtrl = function ($scope) {
+    $scope.tabs = [
+        { title:"Dynamic Title 1", content:"Dynamic content 1" },
+        { title:"Dynamic Title 2", content:"Dynamic content 2", disabled: true }
+    ];
+
+    $scope.alertMe = function() {
+        setTimeout(function() {
+            alert("You've selected the alert tab!");
+        });
+    };
+
+    $scope.navType = 'pills';
+};
+
 var app = angular.module('myApp.controllers', ['$strap.directives']).
   controller('MyCtrl1', [function() {
 
   }]);
 
-   app.controller('BasicInfoCtrl', function($scope, $window, $location, Restangular){
+   app.controller('BasicInfoCtrl', function($rootScope, $scope, $window, $location, Restangular){
 
-       var eightTeenYearsInMs = 568025136000;
-       var todayEightTeenYearsAgo = new Date().getTime() - eightTeenYearsInMs;
-       var adultAge = new Date(todayEightTeenYearsAgo);
+       if($rootScope.isAuthenticated != true){
+           $location.path("/login");
+       }else{
+           var eightTeenYearsInMs = 568025136000;
+           var todayEightTeenYearsAgo = new Date().getTime() - eightTeenYearsInMs;
+           var adultAge = new Date(todayEightTeenYearsAgo);
 
-      //$('#birthdayDatePicker').datepicker('setEndDate', adultAge);
 
-       $scope.languages = LanguageEnum;
-       $scope.skillLevels = SkillLevelEnum;
+            //$('#birthdayDatePicker').datepicker('setEndDate', adultAge);
 
-       //var user = Restangular.one("user", 'f2a2a0f66cb0488c');
-       var user = Restangular.one("users", 'eb6a5e155bfe2825');
+           $scope.languages = LanguageEnum;
+           $scope.skillLevels = SkillLevelEnum;
 
-       user.get().then(function(user){
+
+           //var user = Restangular.one("user", 'f2a2a0f66cb0488c');
+           var user = Restangular.one("users", 'eb6a5e155bfe2825');
+
+           user.get().then(function(user){
            // fix for that stupid datepicker...
            user.birthDay = moment(new Date(user.birthDay)).format('DD/MM/YYYY');
            user.hireDate = moment(new Date(user.hireDate)).format('DD/MM/YYYY');
            $scope.user = user;
-       });
-
-       $scope.handleSave = function(){
-           user = $scope.user;
-           user.put().then(showSuccessAlert('User') );
+           });
        }
+   });
 
-    });
+app.controller('LoginController', function($rootScope, $scope, $location, Restangular){
 
-app.controller('LoginController', function($rootScope, $scope, Restangular){
 
     $scope.handleLogin = function(){
+
+        $scope.alerts = []
 
         var username = $scope.username;
         var password = $scope.password;
@@ -68,26 +86,36 @@ app.controller('LoginController', function($rootScope, $scope, Restangular){
             || (username === 'kristof' && password === 'kristof')){
 
             $rootScope.isAuthenticated = true;
+            $rootScope.loggedUser = username;
+
+            $location.path("/basic-info");
         }else{
+            $scope.alerts.push({type:"error",title:"Error",content: "Wrong username/password combination"});
             $rootScope.isAuthenticated = false;
         }
     }
 
-}) ;
-
-app.controller('LogoutController', function($rootScope, $scope){
     $scope.handleLogout = function(){
+
         $rootScope.isAuthenticated = false;
+
+        $location.path("/login");
     }
-}) ;
+
+});
+
+app.controller('LogoutController', function($rootScope, $scope, $location){
+
+});
+
 
 var motherTongueConstraint = function(){
 
 
-    for (var lang in LanguageEnum) {
-        $('#bg-' + lang + " > button.active").each(function(index, value){
-            console.log($(value).data('skillLevel'));
-        });
+   for (var lang in LanguageEnum) {
+       $('#bg-' + lang + " > button.active").each(function(index, value){
+           console.log($(value).data('skillLevel'));
+       });
 
-    }
+   }
 };
