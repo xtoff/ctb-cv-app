@@ -49,7 +49,7 @@
         <label class="control-label">Birth day</label>
         <div class="controls">
             <div class="control-group input-append">
-                <input type="text" name="birthDay" id="birthdayDatePicker" ng-model="user.birthDay" data-date-format="dd/mm/yyyy" bs-datepicker required>
+                <input type="text" name="birthDay" id="birthdayDatePicker" ng-model="user.birthDay" required bs-datepicker>
                 <button type="button" class="btn" data-toggle="datepicker"><i class="icon-calendar"></i></button>
             </div>
             <span class="error" ng-show="basicInfoForm.birthDay.$error.required">Required!</span>
@@ -60,7 +60,7 @@
         <label class="control-label">Hire date</label>
         <div class="controls">
             <div class="control-group input-append">
-                <input type="text" name="hireDate" ng-model="user.hireDate" data-date-format="dd/mm/yyyy" bs-datepicker required>
+                <input type="text" name="hireDate" ng-model="user.hireDate" required bs-datepicker>
                 <button type="button" class="btn" data-toggle="datepicker"><i class="icon-calendar"></i></button>
             </div>
             <span class="error" ng-show="basicInfoForm.hireDate.$error.required">Required!</span>
@@ -335,9 +335,6 @@
         </div>
     </div>
 </div>
-<ul>
-    <li ng-repeat="lang in user.languages">{{lang.language}} {{lang.skillLevel}}</li>
-</ul>
 
 <div class="row">
     <div class="span12">
@@ -350,10 +347,10 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="lang in user.languages">
-                        <td>{{lang.language}} <span>{{lang.skillLevel}}</span></td>
+                        <td>{{languages[lang.language].label}}</span></td>
                         <td>
-                            <div class="btn-group" ng-model="lang.skillLevel" bs-buttons-radio>
-                                <button ng-repeat="(key, value) in skillLevels" type="button" class="btn" value="{{key}}" >{{value.skillLevelLabel}}</button>
+                            <div class="btn-group" id="bg-{{ lang.language }}" ng-model="lang.skillLevel" bs-buttons-radio>
+                                <button ng-repeat="(key, value) in skillLevels" type="button" class="btn" value="{{key}}" data-skillLevel="{{key}}">{{value.skillLevelLabel}}</button>
                             </div>
                         </td>
                     </tr>
