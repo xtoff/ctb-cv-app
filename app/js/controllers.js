@@ -34,14 +34,18 @@ var app = angular.module('myApp.controllers', ['$strap.directives']).
        var todayEightTeenYearsAgo = new Date().getTime() - eightTeenYearsInMs;
        var adultAge = new Date(todayEightTeenYearsAgo);
 
-      $('#birthdayDatePicker').datepicker('setEndDate', adultAge);
+      //$('#birthdayDatePicker').datepicker('setEndDate', adultAge);
 
        $scope.languages = LanguageEnum;
        $scope.skillLevels = SkillLevelEnum;
 
-       var user = Restangular.one("user", 'f2a2a0f66cb0488c');
+       //var user = Restangular.one("user", 'f2a2a0f66cb0488c');
+       var user = Restangular.one("users", 'eb6a5e155bfe2825');
 
        user.get().then(function(user){
+           // fix for that stupid datepicker...
+           user.birthDay = moment(new Date(user.birthDay)).format('DD/MM/YYYY');
+           user.hireDate = moment(new Date(user.hireDate)).format('DD/MM/YYYY');
            $scope.user = user;
        });
 
@@ -76,3 +80,14 @@ app.controller('LogoutController', function($rootScope, $scope){
         $rootScope.isAuthenticated = false;
     }
 }) ;
+
+var motherTongueConstraint = function(){
+
+
+    for (var lang in LanguageEnum) {
+        $('#bg-' + lang + " > button.active").each(function(index, value){
+            console.log($(value).data('skillLevel'));
+        });
+
+    }
+};
