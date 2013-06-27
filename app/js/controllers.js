@@ -110,12 +110,19 @@ app.controller('LogoutController', function($rootScope, $scope, $location){
 
 
 var motherTongueConstraint = function(){
-
-
-   for (var lang in LanguageEnum) {
+    var motherTongueSelected;
+    for (var lang in LanguageEnum) {
        $('#bg-' + lang + " > button.active").each(function(index, value){
-           console.log($(value).data('skillLevel'));
+           var selectedSkillLevel = SkillLevelEnum[$(value).data('skillLevel')];
+           if(SkillLevelEnum.MT === selectedSkillLevel){
+               motherTongueSelected = true;
+           }
        });
+       if(motherTongueSelected){
+           break;
+       }
+    }
 
-   }
+
+
 };
