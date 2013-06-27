@@ -62,11 +62,11 @@ var app = angular.module('myApp.controllers', ['$strap.directives']).
            //var user = Restangular.one("user", 'f2a2a0f66cb0488c');
            var user = Restangular.one("users", 'eb6a5e155bfe2825');
 
-           user.get().then(function(user){
-           // fix for that stupid datepicker...
-           user.birthDay = moment(new Date(user.birthDay)).format('DD/MM/YYYY');
-           user.hireDate = moment(new Date(user.hireDate)).format('DD/MM/YYYY');
-           $scope.user = user;
+               user.get().then(function(user){
+               // fix for that stupid datepicker...
+               user.birthDay = moment(new Date(user.birthDay)).format('DD/MM/YYYY');
+               user.hireDate = moment(new Date(user.hireDate)).format('DD/MM/YYYY');
+               $scope.user = user;
            });
        }
    });

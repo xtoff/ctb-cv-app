@@ -32,10 +32,9 @@ var showSuccessAlert = function(pMessage) {
     alertBox.addClass('alert-success');
     alertBox.find('span').text(pMessage + ' succesfully updated!');
     alertBox.show('slow');
-<<<<<<< HEAD
 };
-=======
-};
+
+
 
 function showAlert(pMessage) {
     var alertBox = $('div.alert');
@@ -43,5 +42,4 @@ function showAlert(pMessage) {
     alertBox.addClass('alert');
     alertBox.find('span').text(pMessage);
     alertBox.show();
-}
->>>>>>> ea93d2af11c20c060ce9b63d0312bdc460419908
+};
