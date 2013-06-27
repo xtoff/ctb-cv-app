@@ -15,16 +15,8 @@ myApp.config(['$routeProvider', function($routeProvider) {
 myApp.config(
         ['RestangularProvider',
             function(RestangularProvider) {
-                //RestangularProvider.setBaseUrl('http://10.0.2.87:2403');
-                RestangularProvider.setBaseUrl('http://localhost:2403');
+                RestangularProvider.setBaseUrl('http://10.0.2.87:2403');
 } ]);
-
-myApp.value('$strapConfig', {
-    datepicker: {
-        format: 'dd/mm/yyyy'
-    }
-});
-
 
 var showSuccessAlert = function(pMessage) {
     var alertBox = $('div.alert');
@@ -32,9 +24,6 @@ var showSuccessAlert = function(pMessage) {
     alertBox.addClass('alert-success');
     alertBox.find('span').text(pMessage + ' succesfully updated!');
     alertBox.show('slow');
-<<<<<<< HEAD
-};
-=======
 };
 
 function showAlert(pMessage) {
@@ -44,4 +33,3 @@ function showAlert(pMessage) {
     alertBox.find('span').text(pMessage);
     alertBox.show();
 }
->>>>>>> ea93d2af11c20c060ce9b63d0312bdc460419908
