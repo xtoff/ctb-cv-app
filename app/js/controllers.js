@@ -6,8 +6,7 @@ var SkillLevelEnum = {
                         NA :   {"skillLevel": 0, "skillLevelLabel": "N/A"},
                         BASIC : {"skillLevel": 1, "skillLevelLabel": "Basic"},
                         GOOD : {"skillLevel": 2, "skillLevelLabel": "Good"},
-                        FLUENT : {"skillLevel": 3, "skillLevelLabel": "Fluent"},
-                        MT : {"skillLevel": 4, "skillLevelLabel": "Mothertongue"}
+                        FLUENT : {"skillLevel": 3, "skillLevelLabel": "Fluent"}
 };
 
 var LanguageEnum = {
@@ -62,12 +61,24 @@ var app = angular.module('myApp.controllers', ['$strap.directives']).
            var user = Restangular.one("user", 'f2a2a0f66cb0488c');
            //var user = Restangular.one("users", 'eb6a5e155bfe2825');
 
-               user.get().then(function(user){
-               // fix for that stupid datepicker...
-               user.birthDay = moment(new Date(user.birthDay)).format('DD/MM/YYYY');
-               user.hireDate = moment(new Date(user.hireDate)).format('DD/MM/YYYY');
+           user.get().then(function(user){
                $scope.user = user;
-           });
+            });
+       }
+
+       $scope.handleSave = function(){
+           user = $scope.user;
+
+           if(Object.prototype.toString.call(user.hireDate) === '[object Date]'){
+               var hireDate = new Date(user.hireDate.getTime());
+               user.hireDate = moment(hireDate).format("DD-MM-YYYY");
+           }
+
+           if(Object.prototype.toString.call(user.birthDay) === '[object Date]'){
+               var birthDay = new Date(user.birthDay.getTime());
+               user.birthDay = moment(birthDay).format("DD-MM-YYYY");
+           }
+           user.put().then(showSuccessAlert('User') );
        }
    });
 
@@ -134,6 +145,11 @@ app.controller('LogoutController', function($rootScope, $scope, $location){
 
 });
 
+app.value('$strapConfig', {
+    datepicker: {
+        format: 'dd-mm-yyyy'
+    }
+});
 
 var motherTongueConstraint = function(){
     var motherTongueSelected;
