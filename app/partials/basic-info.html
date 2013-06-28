@@ -331,10 +331,16 @@
     <div class="span12">
         <fieldset>
             <legend>Language knowledge</legend>
+            <div>
+                <select id="motherTongue" name="motherTongue" ng-model="user.motherTongue" class="input-xlarge">
+                    <option selected="selected">(please select a mothertongue)<span class="caret"></span></option>
+                    <option ng-repeat="(key, value) in languages" value="{{key}}">{{value.label}}</option>
+                </select>
+            </div>
             <table class="table">
                 <thead>
                 <th>Language</th>
-                <th rowspan="2">Skill Level</th>
+                <th>Skill Level</th>
                 </thead>
                 <tbody>
                 <tr ng-repeat="lang in user.languages">
