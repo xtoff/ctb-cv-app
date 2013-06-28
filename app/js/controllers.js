@@ -42,9 +42,9 @@ var app = angular.module('myApp.controllers', ['$strap.directives']).
 
   }]);
 
-   app.controller('BasicInfoCtrl', function($rootScope, $scope, $window, $location, Restangular){
+   app.controller('BasicInfoCtrl', function($rootScope, $scope, $window, $location, Restangular, $authService){
 
-       if($rootScope.isAuthenticated != true){
+       if(!$authService.isLoggedIn()){
            $location.path("/login");
        }else{
            var eightTeenYearsInMs = 568025136000;
@@ -82,19 +82,43 @@ var app = angular.module('myApp.controllers', ['$strap.directives']).
        }
    });
 
-app.controller('LoginController', function($rootScope, $scope, $location, Restangular){
+app.controller('LoginController', function($rootScope, $scope, $location, Restangular, $authService){
 
+    var user = new Object();
+
+    $scope.isLoggedIn = function(){
+        if($authService.isLoggedIn()){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     $scope.handleLogin = function(){
+
+        var remember = $('#remember').is(":checked");
 
         $scope.alerts = []
 
         var username = $scope.username;
         var password = $scope.password;
 
-        if((username === 'frederik' && password === 'frederik')
+        if($authService.isLoggedIn()){
+            $rootScope.isAuthenticated = true;
+            $rootScope.loggedUser = username;
+
+            $location.path("/basic-info");
+        }else if((username === 'frederik' && password === 'frederik')
             || (username === 'bert' && password === 'bert')
             || (username === 'kristof' && password === 'kristof')){
+
+
+            user.name = username;
+            user.login = username;
+            user.password = password;
+            user.id = 'eb6a5e155bfe2825';
+
+            $authService.login(user, password, remember);
 
             $rootScope.isAuthenticated = true;
             $rootScope.loggedUser = username;
@@ -107,6 +131,8 @@ app.controller('LoginController', function($rootScope, $scope, $location, Restan
     }
 
     $scope.handleLogout = function(){
+
+        $authService.logout();
 
         $rootScope.isAuthenticated = false;
 
