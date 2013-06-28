@@ -58,8 +58,8 @@ var app = angular.module('myApp.controllers', ['$strap.directives']).
            $scope.skillLevels = SkillLevelEnum;
 
 
-           //var user = Restangular.one("user", 'f2a2a0f66cb0488c');
-           var user = Restangular.one("users", 'eb6a5e155bfe2825');
+           var user = Restangular.one("user", 'f2a2a0f66cb0488c');
+           //var user = Restangular.one("users", 'eb6a5e155bfe2825');
 
            user.get().then(function(user){
                $scope.user = user;
@@ -78,8 +78,6 @@ var app = angular.module('myApp.controllers', ['$strap.directives']).
                var birthDay = new Date(user.birthDay.getTime());
                user.birthDay = moment(birthDay).format("DD-MM-YYYY");
            }
-           console.log(user.hireDate);
-           console.log(user.birthDay);
            user.put().then(showSuccessAlert('User') );
        }
    });
