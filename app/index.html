@@ -25,13 +25,13 @@
                 </div>
 
                 <div style="float: right; ">
-                    <span ng-show="isAuthenticated">
+                    <span ng-show="isLoggedIn()">
                         Welkom {{ loggedUser }}&nbsp;&nbsp;
                     </span>
-                    <div ng-show="isAuthenticated" class="label label-inverse" style="background-color:#eb1d32;">
+                    <div ng-show="isLoggedIn()" class="label label-inverse" style="background-color:#eb1d32;">
                         <a class="noStyleLink" href="#/login" ng-click="handleLogout()">Logout</a>
                     </div>
-                    <div ng-hide="isAuthenticated" class="label label-inverse" style="background-color:#eb1d32;">
+                    <div ng-hide="isLoggedIn()" class="label label-inverse" style="background-color:#eb1d32;">
                         <a class="noStyleLink" href="#/login">Login</a>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
 
         <div class="mainContent">
             <div class="container hero-unit">
-                <div ng-controller="TabsDemoCtrl">
+                <!--<div ng-controller="TabsDemoCtrl">
                     <tabset>
                         <tab heading="Static title">Static content</tab>
                         <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled">
@@ -54,7 +54,7 @@
                             I've got an HTML heading, and a select callback. Pretty cool!
                         </tab>
                     </tabset>
-                </div>
+                </div>      -->
                 <div ng-view></div>
             </div>
         </div>
@@ -71,7 +71,7 @@
   <script src="lib/bootstrap/bootstrap-datepicker.js"></script>
   <script src="lib/restangular.js"></script>
   <script src="lib/moment.min.js"></script>
-
+  <script src="lib/angular-webstorage.js"></script>
 
   <script src="js/app.js"></script>
   <script src="lib/angular-strap/directives/tab.js"></script>
