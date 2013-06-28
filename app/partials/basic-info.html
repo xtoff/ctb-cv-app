@@ -331,11 +331,13 @@
     <div class="span12">
         <fieldset>
             <legend>Language knowledge</legend>
-            <div>
-                <select id="motherTongue" name="motherTongue" ng-model="user.motherTongue" class="input-xlarge">
-                    <option selected="selected">(please select a mothertongue)<span class="caret"></span></option>
-                    <option ng-repeat="(key, value) in languages" value="{{key}}">{{value.label}}</option>
-                </select>
+            <div class="row">
+                <label class="span3">Mothertongue</label>
+                <div class="span9">
+                    <select ng-model="user.motherTongue" name="motherTongue" ng-options="key as value.label for (key, value) in languages">
+                    </select>
+                    <span class="error" ng-show="basicInfoForm.motherTongue.$error.required">Required!</span>
+                </div>
             </div>
             <table class="table">
                 <thead>
@@ -347,7 +349,7 @@
                     <td>{{languages[lang.language].label}}</span></td>
                     <td>
                         <div class="btn-group" id="bg-{{ lang.language }}" ng-model="lang.skillLevel" bs-buttons-radio>
-                            <button ng-repeat="(key, value) in skillLevels" type="button" class="btn" value="{{key}}"
+                            <button ng-repeat="(key, value) in skillLevels | orderBy:'skillLevel':false" type="button" class="btn" value="{{value.skillLevelKey}}"
                                     data-skill-level="{{key}}">{{value.skillLevelLabel}}
                             </button>
                         </div>
