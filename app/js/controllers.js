@@ -3,11 +3,18 @@
 /* Controllers */
 
 var SkillLevelEnum = {
-                        NA :   {"skillLevel": 0, "skillLevelLabel": "N/A"},
-                        BASIC : {"skillLevel": 1, "skillLevelLabel": "Basic"},
-                        GOOD : {"skillLevel": 2, "skillLevelLabel": "Good"},
-                        FLUENT : {"skillLevel": 3, "skillLevelLabel": "Fluent"}
+    NA :   {"skillLevel": 0, "skillLevelLabel": "N/A"},
+    BASIC : {"skillLevel": 1, "skillLevelLabel": "Basic"},
+    GOOD : {"skillLevel": 2, "skillLevelLabel": "Good"},
+    FLUENT : {"skillLevel": 3, "skillLevelLabel": "Fluent"}
 };
+
+var SkillLevelArray = [
+    { 'skillLevelKey' : 'NA', "skillLevel": 0, "skillLevelLabel": "N/A"},
+    { 'skillLevelKey' : 'BASIC', "skillLevel": 1, "skillLevelLabel": "Basic"},
+    { 'skillLevelKey' : 'GOOD', "skillLevel": 2, "skillLevelLabel": "Good"},
+    { 'skillLevelKey' : 'FLUENT', "skillLevel": 3, "skillLevelLabel": "Fluent"}
+];
 
 var LanguageEnum = {
     NL : {"label" : "Dutch"},
@@ -55,7 +62,7 @@ var app = angular.module('myApp.controllers', ['$strap.directives']).
             //$('#birthdayDatePicker').datepicker('setEndDate', adultAge);
 
            $scope.languages = LanguageEnum;
-           $scope.skillLevels = SkillLevelEnum;
+           $scope.skillLevels = SkillLevelArray;
 
 
            //var user = Restangular.one("user", 'f2a2a0f66cb0488c');
