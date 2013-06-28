@@ -2,7 +2,7 @@
 
 
 // Declare app level module which depends on filters, and services
-var myApp = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 'myApp.controllers','restangular']);
+var myApp = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 'myApp.controllers','restangular','$strap.directives']);
 
 myApp.config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/login', { templateUrl: 'partials/login.html', controller: 'LoginController'});
@@ -15,7 +15,8 @@ myApp.config(['$routeProvider', function($routeProvider) {
 myApp.config(
         ['RestangularProvider',
             function(RestangularProvider) {
-                RestangularProvider.setBaseUrl('http://10.0.2.87:2403');
+                //RestangularProvider.setBaseUrl('http://10.0.2.87:2403');
+                RestangularProvider.setBaseUrl('http://localhost:2403');
 } ]);
 
 var showSuccessAlert = function(pMessage) {
