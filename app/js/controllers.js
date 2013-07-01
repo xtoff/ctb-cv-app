@@ -112,13 +112,13 @@ app.controller('LoginController', function($rootScope, $scope, $location, Restan
             || (username === 'bert' && password === 'bert')
             || (username === 'kristof' && password === 'kristof')){
 
-
             user.name = username;
             user.login = username;
             user.password = password;
+            user.remember = remember;
             user.id = 'eb6a5e155bfe2825';
 
-            $authService.login(user, password, remember);
+            $authService.login(user);
 
             $rootScope.isAuthenticated = true;
             $rootScope.loggedUser = username;
