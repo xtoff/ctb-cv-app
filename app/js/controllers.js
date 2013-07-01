@@ -2,32 +2,6 @@
 
 /* Controllers */
 
-var SkillLevelEnum = {
-    NA :   {"skillLevel": 0, "skillLevelLabel": "N/A"},
-    BASIC : {"skillLevel": 1, "skillLevelLabel": "Basic"},
-    GOOD : {"skillLevel": 2, "skillLevelLabel": "Good"},
-    FLUENT : {"skillLevel": 3, "skillLevelLabel": "Fluent"}
-};
-
-var SkillLevelArray = [
-    { 'skillLevelKey' : 'NA', "skillLevel": 0, "skillLevelLabel": "N/A"},
-    { 'skillLevelKey' : 'BASIC', "skillLevel": 1, "skillLevelLabel": "Basic"},
-    { 'skillLevelKey' : 'GOOD', "skillLevel": 2, "skillLevelLabel": "Good"},
-    { 'skillLevelKey' : 'FLUENT', "skillLevel": 3, "skillLevelLabel": "Fluent"}
-];
-
-var LanguageEnum = {
-    NL : {"label" : "Dutch"},
-    FR : {"label" : "French"},
-    EN : {"label" : "English"},
-    DE : {"label" : "German"}
-};
-
-if(Object.freeze){
-    // enum since 1.8.5
-    Object.freeze(SkillLevelEnum);
-    Object.freeze(LanguageEnum);
-}
 
 var TabsDemoCtrl = function ($scope) {
     $scope.tabs = [
@@ -61,12 +35,12 @@ var app = angular.module('myApp.controllers', ['$strap.directives']).
 
             //$('#birthdayDatePicker').datepicker('setEndDate', adultAge);
 
-           $scope.languages = LanguageEnum;
-           $scope.skillLevels = SkillLevelArray;
+           $scope.languages = constants.LanguageEnum;
+           $scope.skillLevels = constants.SkillLevelArray;
 
 
-           var user = Restangular.one("user", 'f2a2a0f66cb0488c');
-           //var user = Restangular.one("users", 'eb6a5e155bfe2825');
+           //var user = Restangular.one("user", 'f2a2a0f66cb0488c');
+           var user = Restangular.one("users", 'eb6a5e155bfe2825');
 
            user.get().then(function(user){
                $scope.user = user;
@@ -85,7 +59,7 @@ var app = angular.module('myApp.controllers', ['$strap.directives']).
                var birthDay = new Date(user.birthDay.getTime());
                user.birthDay = moment(birthDay).format("DD-MM-YYYY");
            }
-           user.put().then(showSuccessAlert('User') );
+           user.put().then(utils.showSuccessAlert('User') );
        }
    });
 
@@ -152,26 +126,10 @@ app.controller('LogoutController', function($rootScope, $scope, $location){
 
 });
 
-app.value('$strapConfig', {
-    datepicker: {
-        format: 'dd-mm-yyyy'
-    }
+
+app.controller('DiplomaController', function($rootScope, $scope, $location, Restangular, $authService){
+
 });
 
-var motherTongueConstraint = function(){
-    var motherTongueSelected;
-    for (var lang in LanguageEnum) {
-       $('#bg-' + lang + " > button.active").each(function(index, value){
-           var selectedSkillLevel = SkillLevelEnum[$(value).data('skillLevel')];
-           if(SkillLevelEnum.MT === selectedSkillLevel){
-               motherTongueSelected = true;
-           }
-       });
-       if(motherTongueSelected){
-           break;
-       }
-    }
 
 
-
-};

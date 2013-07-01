@@ -34,22 +34,14 @@ myApp.run(function($rootScope,$location, $authService) {
 myApp.config(
         ['RestangularProvider',
             function(RestangularProvider) {
-                RestangularProvider.setBaseUrl('http://10.0.2.87:2403');
-                //RestangularProvider.setBaseUrl('http://localhost:2403');
+                //RestangularProvider.setBaseUrl('http://10.0.2.87:2403');
+                RestangularProvider.setBaseUrl('http://localhost:2403');
 } ]);
 
-var showSuccessAlert = function(pMessage) {
-    var alertBox = $('div.alert');
-    /*alertBox.removeClass('alert alert-success');*/
-    alertBox.addClass('alert-success');
-    alertBox.find('span').text(pMessage + ' succesfully updated!');
-    alertBox.show('slow');
-};
 
-function showAlert(pMessage) {
-    var alertBox = $('div.alert');
-    alertBox.removeClass('success');
-    alertBox.addClass('alert');
-    alertBox.find('span').text(pMessage);
-    alertBox.show();
-};
+
+app.value('$strapConfig', {
+    datepicker: {
+        format: 'dd-mm-yyyy'
+    }
+});
