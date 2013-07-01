@@ -131,8 +131,9 @@ app.controller('DiplomaController', function($rootScope, $scope, $location, Rest
     if(!$authService.isLoggedIn()){
         $location.path("/login");
     }
-
+    $scope.selectedEducation = 'DIP';
     $scope.educations = constants.EducationsArray;
+    $scope.diplomaTypes = constants.DiplomaTypes;
 
 });
 

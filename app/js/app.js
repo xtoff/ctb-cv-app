@@ -7,9 +7,9 @@ var myApp = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.d
 myApp.config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/login', { templateUrl: 'partials/login.html', controller: 'LoginController'});
     $routeProvider.when('/logout', { templateUrl: 'index.html', controller: 'LoginController'});
+    $routeProvider.when("/education", { templateUrl:'partials/educations.html', controller: 'DiplomaController' });
     $routeProvider.when("/update", { templateUrl:'partials/update.html' });
     $routeProvider.when("/basic-info", { templateUrl:'partials/basic-info.html', controller: 'BasicInfoCtrl' });
-    $routeProvider.when("/educations", { templateUrl:'partials/educations.html', controller: 'DiplomaController' });
     $routeProvider.otherwise({redirectTo: '/login'});
   }]) ;
 
@@ -22,11 +22,7 @@ myApp.run(function($rootScope,$location, $authService) {
         $rootScope.remember = $authService.localUser().remember;
     }
 
-    if($authService.isLoggedIn()) {
-        console.log('checked in as : ' + $authService.currentUser().name + '[login: ' + $authService.currentUser().login + ']');
-        $location.path('/basic-info');
-    }
-    else {
+    if(!$authService.isLoggedIn()) {
         console.log('not checked in');
         $location.path('/login');
     }
@@ -41,7 +37,7 @@ myApp.config(
 
 
 
-app.value('$strapConfig', {
+myApp.value('$strapConfig', {
     datepicker: {
         format: 'dd-mm-yyyy'
     }
