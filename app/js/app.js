@@ -7,6 +7,7 @@ var myApp = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.d
 myApp.config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/login', { templateUrl: 'partials/login.html', controller: 'LoginController'});
     $routeProvider.when('/logout', { templateUrl: 'index.html', controller: 'LoginController'});
+    $routeProvider.when("/education", { templateUrl:'partials/educations.html', controller: 'DiplomaController' });
     $routeProvider.when("/update", { templateUrl:'partials/update.html' });
     $routeProvider.when("/basic-info", { templateUrl:'partials/basic-info.html', controller: 'BasicInfoCtrl' });
     $routeProvider.otherwise({redirectTo: '/login'});
@@ -21,9 +22,8 @@ myApp.run(function($rootScope,$location, $authService) {
         $rootScope.remember = $authService.storageUser().remember;
     }
 
-    if($authService.isLoggedIn()) {
-        $location.path('/basic-info');
-    }else {
+    if(!$authService.isLoggedIn()) {
+        console.log('not checked in');
         $location.path('/login');
     }
 });
@@ -35,18 +35,10 @@ myApp.config(
                 //RestangularProvider.setBaseUrl('http://localhost:2403');
 } ]);
 
-var showSuccessAlert = function(pMessage) {
-    var alertBox = $('div.alert');
-    /*alertBox.removeClass('alert alert-success');*/
-    alertBox.addClass('alert-success');
-    alertBox.find('span').text(pMessage + ' succesfully updated!');
-    alertBox.show('slow');
-};
 
-function showAlert(pMessage) {
-    var alertBox = $('div.alert');
-    alertBox.removeClass('success');
-    alertBox.addClass('alert');
-    alertBox.find('span').text(pMessage);
-    alertBox.show();
-};
+
+myApp.value('$strapConfig', {
+    datepicker: {
+        format: 'dd-mm-yyyy'
+    }
+});
