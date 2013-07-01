@@ -13,11 +13,12 @@ var constants = {
         FR : {"label" : "French"},
         EN : {"label" : "English"},
         DE : {"label" : "German"}
-    }
-};
+    },
 
-if(Object.freeze){
-    // enum since 1.8.5
-    Object.freeze(constants.SkillLevelArray);
-    Object.freeze(constants.LanguageEnum);
-}
+    EducationsArray : [
+        {'educationId' : 0, 'educationLabel': 'Diplomas'},
+        {'educationId' : 1, 'educationLabel': 'Courses'},
+        {'educationId' : 2, 'educationLabel': 'Certificates'},
+        {'educationId' : 3, 'educationLabel': 'Books'},
+    ]
+};

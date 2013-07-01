@@ -9,6 +9,7 @@ myApp.config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/logout', { templateUrl: 'index.html', controller: 'LoginController'});
     $routeProvider.when("/update", { templateUrl:'partials/update.html' });
     $routeProvider.when("/basic-info", { templateUrl:'partials/basic-info.html', controller: 'BasicInfoCtrl' });
+    $routeProvider.when("/educations", { templateUrl:'partials/educations.html', controller: 'DiplomaController' });
     $routeProvider.otherwise({redirectTo: '/login'});
   }]) ;
 
@@ -34,8 +35,8 @@ myApp.run(function($rootScope,$location, $authService) {
 myApp.config(
         ['RestangularProvider',
             function(RestangularProvider) {
-                //RestangularProvider.setBaseUrl('http://10.0.2.87:2403');
-                RestangularProvider.setBaseUrl('http://localhost:2403');
+                RestangularProvider.setBaseUrl('http://10.0.2.87:2403');
+                //RestangularProvider.setBaseUrl('http://localhost:2403');
 } ]);
 
 
