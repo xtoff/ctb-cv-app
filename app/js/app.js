@@ -9,6 +9,7 @@ myApp.config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/logout', { templateUrl: 'index.html', controller: 'LoginController'});
     $routeProvider.when("/update", { templateUrl:'partials/update.html' });
     $routeProvider.when("/basic-info", { templateUrl:'partials/basic-info.html', controller: 'BasicInfoCtrl' });
+    $routeProvider.when("/educations", { templateUrl:'partials/educations.html', controller: 'DiplomaController' });
     $routeProvider.otherwise({redirectTo: '/login'});
   }]) ;
 
@@ -38,18 +39,10 @@ myApp.config(
                 //RestangularProvider.setBaseUrl('http://localhost:2403');
 } ]);
 
-var showSuccessAlert = function(pMessage) {
-    var alertBox = $('div.alert');
-    /*alertBox.removeClass('alert alert-success');*/
-    alertBox.addClass('alert-success');
-    alertBox.find('span').text(pMessage + ' succesfully updated!');
-    alertBox.show('slow');
-};
 
-function showAlert(pMessage) {
-    var alertBox = $('div.alert');
-    alertBox.removeClass('success');
-    alertBox.addClass('alert');
-    alertBox.find('span').text(pMessage);
-    alertBox.show();
-};
+
+app.value('$strapConfig', {
+    datepicker: {
+        format: 'dd-mm-yyyy'
+    }
+});
