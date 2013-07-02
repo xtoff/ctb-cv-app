@@ -1,10 +1,6 @@
 'use strict';
 
 /* Services */
-
-
-// Demonstrate how to register services
-// In this case it is a simple value service.
 angular.module('myApp.services', []).
   value('version', '0.1');
 
@@ -18,31 +14,31 @@ angular.module('AuthService', ['webStorageModule'])
             this.password = "";
         };
 
-        var currentUser = new User();
+        //create two users for session and local storage
+        var sessionUser = new User();
         var storageUser = new User();
+
+        //if the user checked 'Remember me', the storageUser is populated
         storageUser.login = webStorage.local.get('user_login');
         storageUser.password = webStorage.local.get('user_password');
         storageUser.remember = webStorage.local.get('user_remember');
 
-        currentUser.name = webStorage.session.get('user_name');
-        currentUser.id = webStorage.session.get('user_id');
-        currentUser.login = webStorage.session.get('user_login');
-        currentUser.password = webStorage.session.get('user_password');
-        var loggedIn = (currentUser.name != null && currentUser.id != null && currentUser.login != null);
-        var password = webStorage.session.get('user_password');
-        var remember =  webStorage.local.get('user_remember');
+        //every time a user logs in, a sessionUser is populated
+        sessionUser.name = webStorage.session.get('user_name');
+        sessionUser.id = webStorage.session.get('user_id');
+        sessionUser.login = webStorage.session.get('user_login');
+        sessionUser.password = webStorage.session.get('user_password');
 
         return {
 
-            login: function(user, pass, remember) {
+            login: function(user) {
 
-                loggedIn = true;
-                currentUser = user;
-                password = pass;
+                sessionUser = user;
 
-                webStorage.local.add('user_remember', remember);
+                webStorage.local.add('user_remember', user.remember);
 
-                if(remember){
+                //only populate local storage when user checked 'Remember'
+                if(user.remember){
                     webStorage.local.add('user_login', user.login);
                     webStorage.local.add('user_password', user.password);
 
@@ -51,6 +47,7 @@ angular.module('AuthService', ['webStorageModule'])
                     webStorage.local.remove('user_password');
                 }
 
+                //session has to be populated every time a user logs in
                 webStorage.session.add('user_name', user.name);
                 webStorage.session.add('user_id', user.id);
                 webStorage.session.add('user_login', user.login);
@@ -58,13 +55,16 @@ angular.module('AuthService', ['webStorageModule'])
 
             },
             isRemembered: function(){
-              return remember;
+              return storageUser.remember;
             },
             logout: function() {
                 webStorage.session.clear();
-                remember =  webStorage.local.get('user_remember');
 
-                if(!remember){
+                storageUser.remember =  webStorage.local.get('user_remember');
+
+                //$rootScope is used for populating the login and password field
+                //is there a better solution for this?
+                if(!storageUser.remember){
                     $rootScope.username = '';
                     $rootScope.password = '';
                     $rootScope.remember = false;
@@ -73,22 +73,18 @@ angular.module('AuthService', ['webStorageModule'])
                     $rootScope.password = storageUser.password;
                     $rootScope.remember = storageUser.remember;
                 }
-
-                loggedIn = false;
-                password = null;
-                currentUser = null;
             },
             isLoggedIn: function() {
-                return loggedIn;
+                return (sessionUser.login != null);
             },
-            currentUser: function() {
-                return currentUser;
+            sessionUser: function() {
+                return sessionUser;
             },
-            localUser:function() {
+            storageUser:function() {
                 return storageUser;
             },
             password: function() {
-                return password;
+                return sessionUser.password;
             }
         }
 

@@ -17,9 +17,9 @@ myApp.config(['$routeProvider', function($routeProvider) {
 myApp.run(function($rootScope,$location, $authService) {
 
     if($authService.isRemembered()){
-        $rootScope.username = $authService.localUser().login;
-        $rootScope.password = $authService.localUser().password;
-        $rootScope.remember = $authService.localUser().remember;
+        $rootScope.username = $authService.storageUser().login;
+        $rootScope.password = $authService.storageUser().password;
+        $rootScope.remember = $authService.storageUser().remember;
     }
 
     if(!$authService.isLoggedIn()) {
