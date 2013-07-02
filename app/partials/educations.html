@@ -1,10 +1,12 @@
 <div class="container" xmlns="http://www.w3.org/1999/html">
     <form class="form-horizontal" ng-controller="DiplomaController" name="diplomaForm">
-        <div class="form-actions">
-            <select ng-model="selectedEducation" name="availableEducations" ng-options="key as value.label for (key, value) in educations">
-            </select>
-            <button class="btn">Add</button>
-            <button class="btn">Cancel</button>
+        <div class="row">
+            <div class="form-actions">
+                <select ng-model="selectedEducation" name="availableEducations" ng-options="key as value.label for (key, value) in educations">
+                </select>
+                <button class="btn">Add/update</button>
+                <button class="btn">Cancel</button>
+            </div>
         </div>
         <div class="row">
             <div class="control-groups span6">
@@ -33,7 +35,63 @@
                     <span class="error" ng-show="diplomaForm.diplomaType.$error.required">Required!</span>
                 </div>
             </div>
+            <div class="control-groups span6">
+                <label class="control-label">Graduated</label>
+                <div class="control">
+                    <input id="graduated" type="checkbox" name="graduated" ng-model="diploma.graduated" class="checkbox">
+                </div>
+            </div>
         </div>
+        <div class="row">
+            <div class="control-group span6">
+                <label class="control-label">Start education</label>
+
+                <div class="controls">
+                    <div class="control-group input-append">
+                        <input type="text" name="dipFromDate" id="dipFromDate" ng-model="diploma.from" required>
+                    </div>
+                    <span class="error" ng-show="diplomaForm.dipFromDate.$error.required">Required!</span>
+                </div>
+            </div>
+            <div class="control-group span6">
+                <label class="control-label">End education</label>
+
+                <div class="controls">
+                    <div class="control-group input-append">
+                        <input type="text" name="dipEndDate" id="dipEndDate" ng-model="diploma.end" required>
+                    </div>
+                    <span class="error" ng-show="diplomaForm.dipEndDate.$error.required">Required!</span>
+                </div>
+            </div>
+        </div>
+        <fieldset>
+            <legend>Diplomas</legend>
+            <table>
+                <thead>
+                <th>Diploma</th>
+                <th>Institution</th>
+                <th>Type</th>
+                <th>Graduated</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Actions</th>
+                </thead>
+                <tbody>
+                <tr ng-repeat="diploma in consultantDiplomas">
+                    <td>{{languages[lang.language].label}}</td>
+                    <td>
+                        <div class="btn-group" id="bg-{{ lang.language }}" ng-model="lang.skillLevel" bs-buttons-radio>
+                            <button ng-repeat="(key, value) in skillLevels | orderBy:'skillLevel':false" type="button" class="btn" value="{{value.skillLevelKey}}"
+                                    data-skill-level="{{key}}">{{value.skillLevelLabel}}
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
+
+        </fieldset>
 
     </form>
 </div>
