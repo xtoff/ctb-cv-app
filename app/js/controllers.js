@@ -39,8 +39,8 @@ var app = angular.module('myApp.controllers', ['$strap.directives']).
            $scope.skillLevels = constants.SkillLevelArray;
 
 
-           var user = Restangular.one("user", 'f2a2a0f66cb0488c');
-           //var user = Restangular.one("users", 'eb6a5e155bfe2825');
+           //var user = Restangular.one("user", 'f2a2a0f66cb0488c');
+           var user = Restangular.one("users", 'eb6a5e155bfe2825');
 
            user.get().then(function(user){
                $scope.user = user;
@@ -134,6 +134,9 @@ app.controller('DiplomaController', function($rootScope, $scope, $location, Rest
     $scope.selectedEducation = 'DIP';
     $scope.educations = constants.EducationsArray;
     $scope.diplomaTypes = constants.DiplomaTypes;
+
+
+    $scope.consultantDiplomas = [{}];
 
 });
 

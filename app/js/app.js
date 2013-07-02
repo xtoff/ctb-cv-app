@@ -31,8 +31,8 @@ myApp.run(function($rootScope,$location, $authService) {
 myApp.config(
         ['RestangularProvider',
             function(RestangularProvider) {
-                RestangularProvider.setBaseUrl('http://10.0.2.87:2403');
-                //RestangularProvider.setBaseUrl('http://localhost:2403');
+                //RestangularProvider.setBaseUrl('http://10.0.2.87:2403');
+                RestangularProvider.setBaseUrl('http://localhost:2403');
 } ]);
 
 
