@@ -4,22 +4,21 @@
             <div class="form-actions">
                 <select ng-model="selectedEducation" name="availableEducations" ng-options="key as value.label for (key, value) in educations">
                 </select>
-                <button class="btn">Add/update</button>
+                <button class="btn" ng-click="add();">Add/update</button>
                 <button class="btn">Cancel</button>
             </div>
         </div>
         <div class="row">
-            <div class="control-groups span6">
+            <div class="control-group span6">
                 <label class="control-label">Diploma</label>
-                <div class="control">
-                    <input id="diploma" type="text" name="diploma" ng-model="diploma.name" placeholder="Diploma name"
-                           class="input-xlarge" required>
+                <div class="controls">
+                    <input id="diploma" type="text" name="diploma" ng-model="diploma.name" placeholder="Diploma name" class="input-xlarge" required>
                     <span class="error" ng-show="diplomaForm.diploma.$error.required">Required!</span>
                 </div>
             </div>
-            <div class="control-groups span6">
+            <div class="control-group span6">
                 <label class="control-label">Institution</label>
-                <div class="control">
+                <div class="controls">
                     <input id="institution" type="text" name="institution" ng-model="diploma.institution" placeholder="Name of school/institution"
                            class="input-xlarge" required>
                     <span class="error" ng-show="diplomaForm.institution.$error.required">Required!</span>
@@ -27,17 +26,17 @@
             </div>
         </div>
         <div class="row">
-            <div class="control-groups span6">
+            <div class="control-group span6">
                 <label class="control-label">Type</label>
-                <div class="control">
+                <div class="controls">
                     <select ng-model="diploma.type" name="diplomaType" ng-options="key as value.label for (key, value) in diplomaTypes">
                     </select>
                     <span class="error" ng-show="diplomaForm.diplomaType.$error.required">Required!</span>
                 </div>
             </div>
-            <div class="control-groups span6">
+            <div class="control-group span6">
                 <label class="control-label">Graduated</label>
-                <div class="control">
+                <div class="controls">
                     <input id="graduated" type="checkbox" name="graduated" ng-model="diploma.graduated" class="checkbox">
                 </div>
             </div>
@@ -47,9 +46,7 @@
                 <label class="control-label">Start education</label>
 
                 <div class="controls">
-                    <div class="control-group input-append">
-                        <input type="text" name="dipFromDate" id="dipFromDate" ng-model="diploma.from" required>
-                    </div>
+                    <input type="text" name="dipFromDate" id="dipFromDate" ng-model="diploma.from" required>
                     <span class="error" ng-show="diplomaForm.dipFromDate.$error.required">Required!</span>
                 </div>
             </div>
@@ -57,16 +54,16 @@
                 <label class="control-label">End education</label>
 
                 <div class="controls">
-                    <div class="control-group input-append">
-                        <input type="text" name="dipEndDate" id="dipEndDate" ng-model="diploma.end" required>
-                    </div>
-                    <span class="error" ng-show="diplomaForm.dipEndDate.$error.required">Required!</span>
+                    <input type="text" name="dipEndDate" id="dipEndDate" ng-model="diploma.end" required>
                 </div>
+                <span class="error" ng-show="diplomaForm.dipEndDate.$error.required">Required!</span>
             </div>
         </div>
+
+    </form>
         <fieldset>
             <legend>Diplomas</legend>
-            <table>
+            <table class="table">
                 <thead>
                 <th>Diploma</th>
                 <th>Institution</th>
@@ -78,13 +75,14 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="diploma in consultantDiplomas">
-                    <td>{{languages[lang.language].label}}</td>
+                    <td>{{ diploma.name }}</td>
+                    <td>{{ diploma.institution }}</td>
+                    <td>{{ diploma.type }}</td>
+                    <td>{{ diploma.graduated }}</td>
+                    <td>{{ diploma.from }}</td>
+                    <td>{{ diploma.end }}</td>
                     <td>
-                        <div class="btn-group" id="bg-{{ lang.language }}" ng-model="lang.skillLevel" bs-buttons-radio>
-                            <button ng-repeat="(key, value) in skillLevels | orderBy:'skillLevel':false" type="button" class="btn" value="{{value.skillLevelKey}}"
-                                    data-skill-level="{{key}}">{{value.skillLevelLabel}}
-                            </button>
-                        </div>
+                        <i class="icon-trash" ng-click="delete(diploma.id)"></i>
                     </td>
                 </tr>
                 </tbody>
@@ -93,5 +91,4 @@
 
         </fieldset>
 
-    </form>
 </div>
