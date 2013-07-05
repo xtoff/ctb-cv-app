@@ -135,8 +135,33 @@ app.controller('DiplomaController', function($rootScope, $scope, $location, Rest
     $scope.educations = constants.EducationsArray;
     $scope.diplomaTypes = constants.DiplomaTypes;
 
+    var allDiplomas = Restangular.all('diploma');
+    $scope.consultantDiplomas = allDiplomas.getList();
 
-    $scope.consultantDiplomas = [{}];
+    $scope.stupidList = [{'test': 'some stupid item'}];
+
+    $scope.add = function(){
+//        $scope.stupidList.push({'test' : 'aaaa'});
+        allDiplomas.post($scope.diploma).then(function(diploma) {
+            console.log("Object saved OK");
+            $scope.consultantDiplomas = allDiplomas.getList();
+            $scope.diploma = {};
+        }, function() {
+            console.log("There was an error saving");
+        });
+
+    };
+
+    $scope.delete = function(id){
+        console.log(id);
+        var item = Restangular.one('diploma', id);
+        item.remove().then(function() {
+            console.log("Object deleted OK");
+            $scope.consultantDiplomas = allDiplomas.getList();
+        }, function() {
+            console.log("There was an error deleting");
+        });
+    }
 
 });
 
