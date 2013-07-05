@@ -138,10 +138,14 @@ app.controller('DiplomaController', function($rootScope, $scope, $location, Rest
     var allDiplomas = Restangular.all('diploma');
     $scope.consultantDiplomas = allDiplomas.getList();
 
+    $scope.stupidList = [{'test': 'some stupid item'}];
+
     $scope.add = function(){
-        allDiplomas.post($scope.diploma).then(function() {
+//        $scope.stupidList.push({'test' : 'aaaa'});
+        allDiplomas.post($scope.diploma).then(function(diploma) {
             console.log("Object saved OK");
             $scope.consultantDiplomas = allDiplomas.getList();
+            $scope.diploma = {};
         }, function() {
             console.log("There was an error saving");
         });

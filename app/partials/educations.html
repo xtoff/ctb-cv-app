@@ -1,5 +1,5 @@
-<div class="container" xmlns="http://www.w3.org/1999/html">
-    <form class="form-horizontal" ng-controller="DiplomaController" name="diplomaForm">
+<div class="container" xmlns="http://www.w3.org/1999/html" ng-controller="DiplomaController">
+    <form class="form-horizontal"  name="diplomaForm">
         <div class="row">
             <div class="form-actions">
                 <select ng-model="selectedEducation" name="availableEducations" ng-options="key as value.label for (key, value) in educations">
@@ -46,7 +46,7 @@
                 <label class="control-label">Start education</label>
 
                 <div class="controls">
-                    <input type="text" name="dipFromDate" id="dipFromDate" ng-model="diploma.from" required>
+                    <input type="text" name="dipFromDate" id="dipFromDate" ng-model="diploma.startDate" required>
                     <span class="error" ng-show="diplomaForm.dipFromDate.$error.required">Required!</span>
                 </div>
             </div>
@@ -54,13 +54,13 @@
                 <label class="control-label">End education</label>
 
                 <div class="controls">
-                    <input type="text" name="dipEndDate" id="dipEndDate" ng-model="diploma.end" required>
+                    <input type="text" name="dipEndDate" id="dipEndDate" ng-model="diploma.endDate" required>
                 </div>
                 <span class="error" ng-show="diplomaForm.dipEndDate.$error.required">Required!</span>
             </div>
         </div>
-
     </form>
+
         <fieldset>
             <legend>Diplomas</legend>
             <table class="table">
@@ -79,8 +79,8 @@
                     <td>{{ diploma.institution }}</td>
                     <td>{{ diploma.type }}</td>
                     <td>{{ diploma.graduated }}</td>
-                    <td>{{ diploma.from }}</td>
-                    <td>{{ diploma.end }}</td>
+                    <td>{{ diploma.startDate }}</td>
+                    <td>{{ diploma.endDate }}</td>
                     <td>
                         <i class="icon-trash" ng-click="delete(diploma.id)"></i>
                     </td>
